@@ -1,0 +1,32 @@
+{
+  "name": "nudity",
+  "version": "0.0.1",
+  "description": "Node.js nudity detector based on Nude.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "canvas": "^1.1.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/forlooper/nudity"
+  },
+  "keywords": [
+    "nude",
+    "nudity",
+    "scan",
+    "detector"
+  ],
+  "author": "Harry Lee <harry@forlooper.com> (http://forlooper.com/)",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/forlooper/nudity/issues"
+  },
+  "homepage": "https://github.com/forlooper/nudity"
+}
