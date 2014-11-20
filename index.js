@@ -10,7 +10,16 @@ var Canvas = require('canvas');
 var Image = Image = Canvas.Image;
 var fs = require('fs');
 
-exports.scan = function(path, cb) {
+exports.scanFile = function(path, cb) {
+	fs.readFile(path, function(err, data) {
+		if (err)
+			return cb(err);
+
+		exports.scanData(data, cb);
+	});
+};
+
+exports.scanData = function(data, cbPrimary) {
 	// private var definition
 	var canvas = null,
 	ctx = null,
@@ -20,22 +29,15 @@ exports.scan = function(path, cb) {
 		canvas = new Canvas();
 		ctx = canvas.getContext('2d');
 	},
-	loadImage = function(path, cb) {
-		fs.readFile(path, function(err, data) {
-			if (err)
-				return cb(err);
-			
-			var img = new Image;
-			img.src = data;
-			// apply the width and height to the canvas element
-			canvas.width = img.width;
-			canvas.height = img.height;
-			// reset the result function
-			// draw the image into the canvas element
-			ctx.drawImage(img, 0, 0);
-			
-			cb(null);
-		});
+	loadImage = function(){
+		var img = new Image;
+		img.src = data;
+		// apply the width and height to the canvas element
+		canvas.width = img.width;
+		canvas.height = img.height;
+		// reset the result function
+		// draw the image into the canvas element
+		ctx.drawImage(img, 0, 0);
 	},
 	scanImage = function(cb){
 		process.nextTick(function() {
@@ -402,15 +404,11 @@ exports.scan = function(path, cb) {
 	
 	
 	initCanvas();
-	loadImage(path, function(err, result) {
+	loadImage();
+	scanImage(function(err, result) {
 		if (err)
-			return cb(err);
-		
-		scanImage(function(err, result) {
-			if (err)
-				return cb(err);
-			
-			return cb(null, result);
-		});
+			return cbPrimary(err);
+
+		return cbPrimary(null, result);
 	});
 };

@@ -1,6 +1,6 @@
 {
   "name": "nudity",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js nudity detector based on Nude.js",
   "main": "index.js",
   "directories": {
